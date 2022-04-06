@@ -54,7 +54,7 @@ const CartProvider: React.VFC<Props> = (props) => {
 
   const message = React.useMemo(
     () =>
-      `https://api.whatsapp.com/send?phone=9999999&text=${encodeURIComponent(
+      `https://api.whatsapp.com/send?phone=5493425348486&text=${encodeURIComponent(
         `${itemsMsg} \n - Total : ${currency(total)}`,
       )}`,
     [total, itemsMsg],
