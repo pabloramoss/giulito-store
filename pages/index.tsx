@@ -8,7 +8,6 @@ import {
   Text,
   Button,
   IconButton,
-  useColorMode,
   Container,
   Badge,
   Drawer,
@@ -22,7 +21,6 @@ import {
   Divider,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
-import { HiSun, HiMoon } from "react-icons/hi";
 import Link from "next/link"
 
 import api from "../src/api";
@@ -45,7 +43,6 @@ function Home() {
 
   const [{cart, quantity, total, message}, {addItem, incrementItem, decrementItem, removeAll}] =
     useCart();
-  const {colorMode, toggleColorMode} = useColorMode();
   const cartArray: CartItem[] = Array.from(cart.values())
 /*   const filterProducts = (category === "") ? products : products.filter(product => product.category === category)
  */  //{filterProducts.map((product: IProduct) => <FoodCard key={product.id} product={product} />)} devolver los productos filtrados
@@ -183,5 +180,3 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 export default Home
-
-/* <Link isExternal href={message} style={{textDecoration: "none"}}> */
