@@ -41,7 +41,7 @@ const Home: NextPage<Props> = ({ products }) => {
   const [category, setCategory] = useState<string>("");
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-/*   const filterProducts = (category === "") ? products : products.filter(product => product.category === category)
+  const filterProducts = (category === "") ? products : products.filter(product => product.category === category)
 
   function groupBy(objectArray: any, property: any) {
     return objectArray.reduce((acc: any, obj: any) => {
@@ -55,7 +55,7 @@ const Home: NextPage<Props> = ({ products }) => {
   }
   const groupByCategory = groupBy(products, 'category');
   
-  const categories = Object.keys(groupByCategory) */
+  const categories = Object.keys(groupByCategory)
   //uncomment when client add categories in db (change products.map to filterProducts.map line 82)
 
   const [{cart, quantity, total, message}, {addItem, incrementItem, decrementItem, removeAll}] =
@@ -69,17 +69,17 @@ const Home: NextPage<Props> = ({ products }) => {
         <Image my={10} alignSelf="center" src="logo.png" h={{base: 200, md: 300}} w={{base: 200, md: 300}} alt="giulito tienda de ropas logo" />
         <Stack alignSelf="start" my={4}>
           <Heading my={5} fontSize="xl" opacity={0.8}>NUESTROS PRODUCTOS</Heading>
-          {/* <Select 
+          <Select 
             bg="white" 
             mt={10} 
             isRequired 
             onChange={(e)=>setCategory(e.target.value)} 
             placeholder='Todos los productos'>
               {categories.map(category=><option key={category} value={category}>{category}</option>)}
-          </Select> */}
+          </Select>
         </Stack>
         <Grid gridGap={8} templateColumns="repeat(auto-fill, minmax(320px, 1fr))">
-          {products.map((product) => (
+          {filterProducts.map((product) => (
             <Stack key={product.id} gap={3} bg="gray.100" rounded={10} overflow="hidden">
               <Image alt={product.title} objectFit="contain" src={product.image} width="100%" />
               <Flex flex={1} flexDirection="column" px={4} gap={"6px"} h="100%">
