@@ -19,6 +19,7 @@ import {
   DrawerOverlay,
   useDisclosure,
   Divider,
+  Select,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import Link from "next/link"
@@ -27,35 +28,48 @@ import api from "../src/api";
 import { CartItem, Product } from "../src/types";
 import { useCart } from "../src/context";
 import { currency } from "../src/utils";
-import { GetStaticProps } from "next";
+import { GetStaticProps, NextPage } from "next";
 import ProductItem from "../src/ProductItem";
 import { FaWhatsapp } from "react-icons/fa";
 import Navbar from "../src/Navbar";
 
-function Home() {
-  const [products, setProducts] = useState<Product[]>([]);
+interface Props {
+  products: Product[];
+}
+
+const Home: NextPage<Props> = ({ products }) => {
   const [category, setCategory] = useState<string>("");
   const { isOpen, onOpen, onClose } = useDisclosure()
 
-  useEffect(() => {
-    api.list().then(setProducts);
-  }, []);
+/*   const filterProducts = (category === "") ? products : products.filter(product => product.category === category)
+
+  function groupBy(objectArray: any, property: any) {
+    return objectArray.reduce((acc: any, obj: any) => {
+      const key = obj[property];
+      if (!acc[key]) {
+          acc[key] = [];
+      }
+      acc[key].push(obj);
+      return acc;
+    }, {});
+  }
+  const groupByCategory = groupBy(products, 'category');
+  
+  const categories = Object.keys(groupByCategory) */
+  //uncomment when client add categories in db (change products.map to filterProducts.map line 82)
 
   const [{cart, quantity, total, message}, {addItem, incrementItem, decrementItem, removeAll}] =
     useCart();
   const cartArray: CartItem[] = Array.from(cart.values())
-/*   const filterProducts = (category === "") ? products : products.filter(product => product.category === category)
- */  //{filterProducts.map((product: IProduct) => <FoodCard key={product.id} product={product} />)} devolver los productos filtrados
-  //hacer una funcion que haga un array de las categorias
 
   return (
-    <Container boxShadow={"xl"} m={"auto"} maxW="container.xl" minH={"100vh"} bg="gray.50">
+    <Container boxShadow={"xl"} m={"auto"} maxW="container.xl" minH={"100vh"} bg="teal.50">
       <Navbar />
       <Box display={"flex"} flexDirection="column" justifyContent={"space-beetwen"}>
         <Image my={10} alignSelf="center" src="logo.png" h={{base: 200, md: 300}} w={{base: 200, md: 300}} alt="giulito tienda de ropas logo" />
-        <Stack>
+        <Stack alignSelf="start" my={4}>
           <Heading my={5} fontSize="xl" opacity={0.8}>NUESTROS PRODUCTOS</Heading>
-{/*           <Select 
+          {/* <Select 
             bg="white" 
             mt={10} 
             isRequired 
@@ -77,7 +91,7 @@ function Home() {
               </Flex>
               {!cart.has(product.id) ? (
                 <Button
-                  colorScheme="blue"
+                  colorScheme="teal"
                   onClick={() => addItem(product.id, {...product, quantity: 1})}
                 >
                   Agregar
@@ -85,7 +99,7 @@ function Home() {
               ) : (
                 <Flex alignItems="center" justifyContent="center">
                   <Button
-                    colorScheme="blue"
+                    colorScheme="teal"
                     fontSize="lg"
                     roundedRight={0}
                     onClick={() => decrementItem(product.id)}
@@ -103,7 +117,7 @@ function Home() {
                     {cart.get(product.id)?.quantity}
                   </Text>
                   <Button
-                    colorScheme="blue"
+                    colorScheme="teal"
                     fontSize="lg"
                     roundedLeft={0}
                     onClick={() => incrementItem(product.id)}
@@ -142,7 +156,7 @@ function Home() {
         size={"md"}
       >
         <DrawerOverlay />
-        <DrawerContent>
+        <DrawerContent bg="teal.50">
           <DrawerCloseButton />
           <DrawerHeader alignSelf="center">Tu pedido</DrawerHeader>
           <DrawerBody>
@@ -150,7 +164,7 @@ function Home() {
               {(cartArray.length > 0) ? cartArray.map((product) => <ProductItem key={product.title} product={product} />) : <Heading opacity={0.7} fontSize="md" textAlign="center">Agregue productos a su pedido</Heading> }
             </Stack>
           </DrawerBody>
-          <Divider />
+          <Divider color="black" />
           <DrawerFooter w="100%" justifyContent="center">
             <Stack>
               <Stack justifyContent="space-between" direction="row" py={6}>

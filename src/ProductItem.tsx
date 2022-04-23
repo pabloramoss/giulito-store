@@ -17,9 +17,9 @@ const ProductItem: React.FC<Props> = ({ product })=> {
           <Heading noOfLines={2} fontSize="md">{product.title}</Heading>
           <Heading noOfLines={2} opacity={0.7} fontSize="md">Talle: {product.size}</Heading>
             <Stack alignSelf="start" spacing={0} direction="row" rounded="full" boxShadow="lg">
-              <Button w="20px" h="24px" bg="blue.200" borderLeftRadius="9999" boxShadow="lg" onClick={()=> decrementItem(product.id)}><Icon as={FaMinus} /></Button>
+              <Button w="20px" h="24px" bg="teal.400" borderLeftRadius="9999" boxShadow="lg" onClick={()=> decrementItem(product.id)}><Icon as={FaMinus} /></Button>
               <Text px={3} color="gray.500">{product.quantity}</Text>
-              <Button w="20px" h="24px" bg="blue.200" borderRightRadius="9999" boxShadow="lg" onClick={()=> incrementItem(product.id)}><Icon w={4} h={4} as={FaPlus} /></Button>
+              <Button w="20px" h="24px" bg="teal.400" borderRightRadius="9999" boxShadow="lg" onClick={()=> incrementItem(product.id)}><Icon w={4} h={4} as={FaPlus} /></Button>
             </Stack>
         </Stack>
       </Stack>
